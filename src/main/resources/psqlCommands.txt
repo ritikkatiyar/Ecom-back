@@ -1,0 +1,14 @@
+* Connect to psql cli:
+    psql -U sellify_admin -d postgres (psql -U POSTGRES_USER -d postgres)
+
+* list out databases:
+    \l
+
+* Connect to a database:
+    \c sellify_platform (\c database_name)
+
+* list out tables (relations):
+    \dt
+
+* to see TimeZone:
+    SHOW timezone;

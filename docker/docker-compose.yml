@@ -11,13 +11,17 @@ services:
       POSTGRES_DB: sellify_platform
       POSTGRES_USER: sellify_admin
       POSTGRES_PASSWORD: sellify_pass
+      TZ: UTC
+      PGTZ: UTC
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U sellify_admin"]
+      test: ["CMD-SHELL", "pg_isready -U sellify_admin -d sellify_platform"]
       interval: 10s
       timeout: 5s
       retries: 5
 
 volumes:
   postgres_data:
+
+ # docker exec -it sellify-postgres psql -U sellify_admin -d sellify_platform to access schema in docker

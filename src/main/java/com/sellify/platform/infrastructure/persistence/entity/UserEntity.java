@@ -4,24 +4,30 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user",uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"tenant_id","email"})
-})
-public class UserEntity extends BaseTenantEntity{
+@Table(
+        name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"tenant_id", "email"})
+        }
+)
+public class UserEntity extends BaseTenantEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String userId;
+    @GeneratedValue
+    @Column(name = "user_id", nullable = false, updatable = false)
+    private UUID userId;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
     @Column(nullable = false)
-    private boolean active=true;
+    private boolean active = true;
 }

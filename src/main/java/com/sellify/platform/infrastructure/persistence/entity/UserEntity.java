@@ -1,12 +1,13 @@
 package com.sellify.platform.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Getter
+@Data
 @NoArgsConstructor
 @Entity
 @Table(
@@ -18,14 +19,13 @@ import java.util.UUID;
 public class UserEntity extends BaseTenantEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "user_id", nullable = false, updatable = false)
-    private UUID userId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String userId;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "password_hash", nullable = false)
+    @Column(nullable = false)
     private String passwordHash;
 
     @Column(nullable = false)
